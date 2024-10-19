@@ -10,7 +10,7 @@ type Platform = 'windows' | 'mac' | 'linux'
 type Platforms = Record<Platform, boolean>
 
 interface GameData {
-  genre: string
+  genre: string | null
   review_range: string
   game_count: number
 }
@@ -49,12 +49,13 @@ export default function SliceDiceChart() {
       const result: GameData[] = await response.json()
       
       const processedData = result.reduce<ProcessedGameData[]>((acc, item) => {
-        const existingGenre = acc.find(d => d.genre === item.genre)
+        const genreName = item.genre === null ? "(No Genre)" : item.genre
+        const existingGenre = acc.find(d => d.genre === genreName)
         if (existingGenre) {
           existingGenre[item.review_range] = item.game_count
         } else {
           acc.push({
-            genre: item.genre,
+            genre: genreName,
             [item.review_range]: item.game_count
           })
         }
@@ -80,8 +81,6 @@ export default function SliceDiceChart() {
   return (
     <Card>
       <CardHeader>
-      <CardTitle><i><center>This query will slice data to include only games for the selected availability (Windows, Mac, Linux) and dices it by game genre and review counts.</center></i></CardTitle>
-      <hr/><br/>
         <CardTitle>Game Distribution by Genre and Review Range</CardTitle>
       </CardHeader>
       <CardContent>
