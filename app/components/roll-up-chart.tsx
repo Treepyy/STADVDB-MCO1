@@ -47,7 +47,7 @@ export default function RollUpChart() {
           This query rolls up the average positive and negative review count and metacritic score from individual games to the year level.
           </center></i></CardTitle>
         <hr/><br/>
-        <CardTitle>Yearly Average Metacritic Score and Total Recommendations</CardTitle>
+        <CardTitle>Yearly Average Metacritic Score, Positive Reviews, and Negative Reviews</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-2 gap-4 mb-4">
