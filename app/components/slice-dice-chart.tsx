@@ -81,6 +81,8 @@ export default function SliceDiceChart() {
   return (
     <Card>
       <CardHeader>
+        <CardTitle><i><center>This query will slice data to include only games for the selected availability (Windows, Mac, Linux) and dices it by game genre and review counts.</center></i></CardTitle>
+        <hr/><br/>
         <CardTitle>Game Distribution by Genre and Review Range</CardTitle>
       </CardHeader>
       <CardContent>
