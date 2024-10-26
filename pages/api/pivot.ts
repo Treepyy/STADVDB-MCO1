@@ -17,7 +17,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const [rows] = await connection.execute(`
         SELECT 
           t.year,
-          JSON_UNQUOTE(JSON_EXTRACT(c.publishers, '$[0]')) AS publisher,
           COUNT(DISTINCT gs.game_key) AS games_released
         FROM 
           game_sales gs
@@ -26,7 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         WHERE 
           JSON_SEARCH(LOWER(c.publishers), 'one', LOWER(?))
         GROUP BY 
-          t.year, publisher
+          t.year
         ORDER BY 
           t.year, games_released DESC;
       `, [`%${publisher}%`])
